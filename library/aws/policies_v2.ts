@@ -105,6 +105,20 @@ export function s3PublicReadonly(
   ];
 }
 
+export function s3WriteOnlyBuckets(
+  bucket: string,
+  key_prefix: string = "*",
+): Statement[] {
+  return [
+    {
+      Action: ["s3:PutObject"],
+      Effect: "Allow",
+      Principal: "*",
+      Resource: [`arn:aws:s3:::${bucket}/${key_prefix}`],
+    },
+  ];
+}
+
 export function s3ModifyBuckets(
   buckets: string[],
   key_prefix: string = "*",
